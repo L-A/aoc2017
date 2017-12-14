@@ -50,8 +50,13 @@ let denseHash = (array) => {
   for (let i = 0; i <= 240; i += 16) {
     result.push(array.slice(i, i + 16).reduce((a,b) => a ^ b))
   }
-  console.log(result)
   return result.map(num => ("0" + num.toString(16)).substr(-2)).join('') // "Left", uh "pad". It works for this.
 }
 
 console.log(denseHash(t2))
+
+// Helping day 13
+
+module.exports.hash = (i) => {
+  return denseHash( knotHash(list.slice(0), i.split('').map(c => c.charCodeAt(0)).concat([17, 31, 73, 47, 23]), 64) )
+}
